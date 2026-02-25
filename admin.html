@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | JOVIN NIJO</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .admin-body {
+            background: radial-gradient(circle at top right, #0a0a0a, #000);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+        }
+
+        .admin-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--text-muted);
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu i {
+            font-size: 20px;
+        }
+
+        .admin-main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px 60px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .admin-title h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .admin-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .stat-info h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .stat-info p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .admin-section {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-btn {
+            background: var(--accent-gradient);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .back-to-home {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .back-to-home:hover {
+            background: var(--primary-color);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body class="admin-body">
+
+    <div class="sidebar">
+        <div class="admin-logo">
+            <i class="ri-dashboard-fill"></i>
+            <span>Admin Panel</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active" onclick="showSection('dashboard')"><i class="ri-home-4-line"></i>
+                    Dashboard</a></li>
+            <li><a href="#" onclick="showSection('messages')"><i class="ri-message-3-line"></i> Messages <span
+                        id="msg-count-badge" class="badge-count">0</span></a></li>
+            <li><a href="#" onclick="showSection('settings')"><i class="ri-settings-4-line"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="admin-main">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h1>Welcome Back, Jovin!</h1>
+                    <p>Monitor your portfolio performance here.</p>
+                </div>
+                <div class="admin-user">
+                    <div class="logo-circle"><span class="logo-text"><b>JN</b></span></div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="ri-eye-line"></i></div>
+                    <div class="stat-info">
+                        <h2 id="total-views">0</h2>
+                        <p>Total Life-time Views</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="ri-message-3-line"></i></div>
+                    <div class="stat-info">
+                        <h2 id="total-messages">0</h2>
+                        <p>Active Messages</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messages-section" style="display: none;">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h1>User Messages</h1>
+                    <p>Read and manage messages from your visitors.</p>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <div class="section-header">
+                    <h3>Inbox</h3>
+                    <button class="admin-btn" onclick="clearAllMessages()"><i class="ri-delete-bin-line"></i> Clear
+                        All</button>
+                </div>
+
+                <div id="messages-list">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messages-tbody">
+                            <!-- Messages will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-messages" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    No messages yet.
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Settings Section -->
+        <div id="settings-section" style="display: none;">
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h1>System Settings</h1>
+                    <p>Customize your portfolio experience.</p>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <!-- Theme & Visibility -->
+                    <div>
+                        <h4 style="margin-bottom: 20px; color: var(--primary-color);">System Controls</h4>
+                        <div class="setting-item"
+                            style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+                            <div>
+                                <span style="display: block; font-weight: 600;">Dark / Light Mode</span>
+                                <small style="color: var(--text-muted); font-size: 11px;">Switch between deep dark and
+                                    modern white.</small>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item"
+                            style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px;">
+                            <div>
+                                <span style="display: block; font-weight: 600;">Maintenance Mode</span>
+                                <small style="color: var(--text-muted); font-size: 11px;">Show "Coming Soon" page to
+                                    visitors.</small>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="maintenance-toggle" onchange="toggleMaintenance()">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Data Management -->
+                    <div>
+                        <h4 style="margin-bottom: 20px; color: var(--primary-color);">Data Management</h4>
+                        <div class="setting-item"
+                            style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px;">
+                            <span style="display: block; font-weight: 600; margin-bottom: 10px;">Export Inbox</span>
+                            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Download all user
+                                messages in a CSV format for your records.</p>
+                            <button class="admin-btn" style="width: 100%;" onclick="exportMessages()"><i
+                                    class="ri-file-download-line"></i> Download CSV</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <a href="index.html" class="back-to-home">
+        <i class="ri-arrow-left-line"></i> Back to Portfolio
+    </a>
+
+    <style>
+        .admin-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: #fff;
+            margin-top: 8px;
+        }
+
+        .setting-item {
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .badge-count {
+            background: var(--primary-color);
+            color: #000;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .admin-table th {
+            text-align: left;
+            padding: 15px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 14px;
+        }
+
+        .delete-msg-btn {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff4d4d;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-msg-btn:hover {
+            background: #ff4d4d;
+            color: #fff;
+        }
+
+        /* Toggle Switch Styles */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #333;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('dashboard-section').style.display = sectionId === 'dashboard' ? 'block' : 'none';
+            document.getElementById('messages-section').style.display = sectionId === 'messages' ? 'block' : 'none';
+            document.getElementById('settings-section').style.display = sectionId === 'settings' ? 'block' : 'none';
+
+            const links = document.querySelectorAll('.sidebar-menu a');
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase().includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function loadDashboard() {
+            // Views
+            const views = localStorage.getItem('portfolio_views') || '0';
+            document.getElementById('total-views').textContent = views;
+
+            // Messages
+            const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
+            document.getElementById('total-messages').textContent = messages.length;
+            const badge = document.getElementById('msg-count-badge');
+            if (badge) badge.textContent = messages.length;
+        }
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
+            const tbody = document.getElementById('messages-tbody');
+            const noMsg = document.getElementById('no-messages');
+            const msgList = document.getElementById('messages-list');
+
+            loadDashboard();
+
+            if (messages.length === 0) {
+                noMsg.style.display = 'block';
+                msgList.style.display = 'none';
+                return;
+            }
+
+            noMsg.style.display = 'none';
+            msgList.style.display = 'block';
+            tbody.innerHTML = '';
+
+            messages.slice().reverse().forEach((msg, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${msg.name}</td>
+                    <td>${msg.email}</td>
+                    <td style="max-width: 300px;">${msg.message}</td>
+                    <td>${new Date(msg.timestamp).toLocaleDateString()}</td>
+                    <td><button class="delete-msg-btn" onclick="deleteMessage(${messages.length - 1 - index})"><i class="ri-delete-bin-line"></i></button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteMessage(index) {
+            let messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
+            messages.splice(index, 1);
+            localStorage.setItem('portfolio_messages', JSON.stringify(messages));
+            loadMessages();
+        }
+
+        function clearAllMessages() {
+            if (confirm('Are you sure you want to delete all messages?')) {
+                localStorage.setItem('portfolio_messages', '[]');
+                loadMessages();
+            }
+        }
+
+        // Settings Logic
+        function toggleTheme() {
+            const isLight = document.getElementById('theme-toggle').checked;
+            localStorage.setItem('portfolio_theme', isLight ? 'light' : 'dark');
+            alert('Theme set to ' + (isLight ? 'Light' : 'Dark') + ' Mode. Refresh portfolio to see changes.');
+        }
+
+        function toggleMaintenance() {
+            const isMaintenace = document.getElementById('maintenance-toggle').checked;
+            localStorage.setItem('portfolio_maintenance', isMaintenace);
+            alert('Maintenance Mode ' + (isMaintenace ? 'Enabled' : 'Disabled'));
+        }
+
+        function exportMessages() {
+            const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
+            if (messages.length === 0) {
+                alert('No messages to export!');
+                return;
+            }
+
+            const headers = ['Name', 'Email', 'Message', 'Timestamp'];
+            const rows = messages.map(m => [
+                `"${m.name.replace(/"/g, '""')}"`,
+                `"${m.email.replace(/"/g, '""')}"`,
+                `"${m.message.replace(/"/g, '""')}"`,
+                `"${m.timestamp}"`
+            ]);
+
+            const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "portfolio_messages.csv");
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function loadSettings() {
+            const theme = localStorage.getItem('portfolio_theme');
+            const maintenance = localStorage.getItem('portfolio_maintenance') === 'true';
+
+            document.getElementById('theme-toggle').checked = theme === 'light';
+            document.getElementById('maintenance-toggle').checked = maintenance;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMessages();
+            loadSettings();
+            loadDashboard();
+        });
+    </script>
+</body>
+
+</html>

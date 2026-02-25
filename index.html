@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOVIN NIJO | Frontend Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+
+<body>
+    <!-- Maintenance Mode Overlay -->
+    <div id="maintenance-overlay">
+        <i class="ri-tools-fill"></i>
+        <h1>System Update in Progress</h1>
+        <p>We are currently upgrading Jovin's portfolio to bring you an even better experience. We'll be back online
+            shortly!</p>
+    </div>
+
+    <script>
+        // Theme & Maintenance Init
+        (function () {
+            if (localStorage.getItem('portfolio_maintenance') === 'true') {
+                document.getElementById('maintenance-overlay').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+            if (localStorage.getItem('portfolio_theme') === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        })();
+    </script>
+
+    <!-- Navigation -->
+    <header class="header">
+        <a href="#" class="logo">
+            <div class="logo-circle"><span class="logo-text"><b>JN</b></span></div>
+            <span class="subtitle">Frontend Developer</span>
+        </a>
+
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#about">About me</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="menu-btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="home" id="home">
+        <div class="home-content">
+            <div class="profile-container">
+                <div class="profile-circle">
+                    <!-- Profile image -->
+                    <img src="profile.jpg" alt="JOVIN NIJO" class="profile-img" id="display-profile-img">
+                </div>
+            </div>
+
+            <div class="intro-text">
+                <h1>Hi, I'm <span class="highlight"><b id="display-hero-title">JOVIN NIJO</b></span></h1>
+                <h3 class="typing-text">Computer Science Engineer | Frontend Developer</h3>
+
+                <div class="badge-container">
+                    <span class="badge">Web Developer</span>
+                    <span class="badge">Frontend Specialist</span>
+                    <span class="badge">Ai Enthusiast</span>
+                    <span class="badge">Computer Science Engineer</span>
+                    <span class="badge">Computer Vision Enthusiast</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="ri-map-pin-line"></i>
+                        <div>
+                            <span>Location</span>
+                            <small>Ollur, Kerala, India</small>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-brain-line"></i>
+                        <div>
+                            <span>Expertise</span>
+                            <small>Web Development</small>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="ri-mail-line"></i>
+                        <div>
+                            <span>Contact</span>
+                            <small>jovinnijo57@gmail.com</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com/jovinnijo57-stack" class="github"><i class="ri-github-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/jovin-nijo-773627240" class="linkedin"><i
+                            class="ri-linkedin-fill"></i></a>
+                    <a href="https://www.instagram.com/jovin_nijo" class="instagram"><i
+                            class="ri-instagram-fill"></i></a>
+                    <a href="https://www.facebook.com/share/1NAB4ziX9C/" class="facebook"><i
+                            class="ri-facebook-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-container">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="unistore.png" alt="UniStore Logo">
+                </div>
+                <div class="project-info">
+                    <h3>UniStore</h3>
+                    <p>UniStore is a real-world college-based online store system designed to streamline campus
+                        purchases. Students can register, browse products, place orders, and receive automated pickup
+                        time slots after staff approval. The system includes user authentication, staff dashboard
+                        management, inventory tracking, order scheduling, email notifications, and secure role-based
+                        access. It improves efficiency, reduces crowding, and enhances the campus shopping experience.
+                    </p>
+                    <div class="tech-stack">
+                        <span>CSS</span>
+                        <span>MySQL</span>
+                        <span>PYTHON</span>
+                        <span>HTML</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/jovinnijo57-stack/UniStore.git" target="_blank" class="btn-code"><i
+                                class="ri-github-line"></i> Code</a>
+                        <a href="https://unistore-1.onrender.com/login" target="_blank" class="btn-live"><i
+                                class="ri-external-link-line"></i> Live</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="pharmacy.png" alt="Pharmacy Management System">
+                </div>
+                <div class="project-info">
+                    <h3>Automated Pharmacy & Prescription Management System</h3>
+                    <p>The Automated Pharmacy & Prescription Management System is a full-stack web application that
+                        digitizes the workflow between Doctors, Pharmacists, and Administrators. It allows secure
+                        prescription creation, validation, billing, inventory management, and integrates AI to analyze
+                        and explain prescriptions in a human-friendly manner.</p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>PYTHON</span>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/jovinnijo57-stack/Automated-Pharmacy-Prescription-Management-System.git"
+                            target="_blank" class="btn-code"><i class="ri-github-line"></i> Code</a>
+                        <a href="https://automated-pharmacy-prescription-hb1v.onrender.com" target="_blank"
+                            class="btn-live"><i class="ri-external-link-line"></i> Live</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="docuchat.png.png" alt="DocuChat">
+                </div>
+                <div class="project-info">
+                    <h3>Predictive Governance</h3>
+                    <p> Predictive Governance is a technology-driven approach that uses data analytics, artificial
+                        intelligence, and machine learning to anticipate future challenges and improve decision-making
+                        in public administration. Instead of reacting to problems after they occur, predictive
+                        governance enables institutions to take proactive measures based on data-driven insights.</p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>PYTHON</span>
+                        <span>MySQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="btn-code"><i class="ri-github-line"></i> Code</a>
+                        <a href="#" class="btn-live"><i class="ri-external-link-line"></i> Live</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="certificates" id="certificates">
+        <h2 class="section-title">Certificates</h2>
+        <div class="cert-filter">
+            <button class="active">Hackathon</button>
+            <button>Internship</button>
+            <button>Workshop</button>
+        </div>
+        <div class="cert-container" id="cert-container">
+            <!-- Hackathon Certificates -->
+            <div class="cert-card" data-category="hackathon">
+                <div class="cert-img">
+                    <img src="cert_yodha.jpg.jpg" alt="YODHA Hackathon Certificate">
+                    <div class="cert-overlay">
+                        <a href="cert_yodha.jpg.jpg" target="_blank" class="btn-small">View Certificate</a>
+                    </div>
+                </div>
+                <div class="cert-content">
+                    <h4>24 Hour National Level YODHA Hackathon</h4>
+                    <p>Jyothi Engineering College (AIDA)</p>
+                </div>
+            </div>
+            <div class="cert-card" data-category="hackathon">
+                <div class="cert-img">
+                    <img src="cert_sphota.jpg.png" alt="IEEE SPHOTA Hackathon Certificate">
+                    <div class="cert-overlay">
+                        <a href="cert_sphota.jpg.png" target="_blank" class="btn-small">View Certificate</a>
+                    </div>
+                </div>
+                <div class="cert-content">
+                    <h4>IEEE SPHOTA — 24 Hour Hackathon</h4>
+                    <p>Team: Lazy Techies &nbsp;|&nbsp; IEEE SB UCEK &amp; STIST</p>
+                </div>
+            </div>
+            <!-- Internship Certificates -->
+            <div class="cert-card" data-category="internship">
+                <div class="cert-img">
+                    <img src="cert_star_intern.jpg.jpg" alt="Star Innovations Internship Certificate">
+                    <div class="cert-overlay">
+                        <a href="cert_star_intern.jpg.jpg" target="_blank" class="btn-small">View Certificate</a>
+                    </div>
+                </div>
+                <div class="cert-content">
+                    <h4>Internship in Python</h4>
+                    <p>Star Innovations &nbsp;|&nbsp; 8th July 2024 - 12th July 2024</p>
+                </div>
+            </div>
+            <!-- Workshop Certificates -->
+            <div class="cert-card" data-category="workshop">
+                <div class="cert-img">
+                    <img src="cert_cybsec.jpg.png" alt="Cyber Security Workshop Certificate">
+                    <div class="cert-overlay">
+                        <a href="cert_cybsec.jpg.png" target="_blank" class="btn-small">View Certificate</a>
+                    </div>
+                </div>
+                <div class="cert-content">
+                    <h4>Cyber Security Essentials Workshop</h4>
+                    <p>TechXQuintessence &nbsp;|&nbsp; IEEE CS SBC FISAT &nbsp;|&nbsp; 13th July 2025</p>
+                </div>
+            </div>
+            <div class="cert-card" data-category="workshop">
+                <div class="cert-img">
+                    <img src="cert_nxtwave.jpg.png" alt="NxtWave AI Workshop Certificate">
+                    <div class="cert-overlay">
+                        <a href="cert_nxtwave.jpg.png" target="_blank" class="btn-small">View Certificate</a>
+                    </div>
+                </div>
+                <div class="cert-content">
+                    <h4>AI for Students: Build Your Own Generative AI Model</h4>
+                    <p>NxtWave &nbsp;|&nbsp; 11th November 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Me Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            <div class="about-img">
+                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_w51pcehl.json"
+                    background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+            </div>
+            <div class="about-text">
+                <h3>I'm a Developer with a passion for Web Technologies.</h3>
+
+                <div id="display-about-text">
+                    <p>Hi, I'm <b>JOVIN NIJO</b>, a B.tech Computer Science student (2023–2027) at Nirmala College of
+                        Engineering.</p>
+
+                    <p>I'm passionate about web development and building smart digital solutions that solve real-world
+                        problems. I enjoy working on both frontend and backend technologies and continuously improving
+                        my skills in modern development frameworks.</p>
+
+                    <p>My goal is to become a skilled Software Developer, contributing to innovative projects while
+                        continuously growing my technical and problem-solving skills.</p>
+
+                    <p>When I'm not coding, I enjoy reading, gaming, designing, photography and exploring new ideas in
+                        technology.</p>
+                </div>
+
+                <a href="#" class="btn-live" id="display-resume-btn">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-card show-on-scroll">
+            <!-- Heading -->
+            <h2 class="contact-title">Let’s Connect & Collaborate 💙</h2>
+
+            <p class="contact-subtitle">
+                Whether it's a new project, collaboration, or just say hi — I'd love to hear from you!
+            </p>
+
+            <div class="contact-grid">
+                <!-- Contact Info & Socials -->
+                <div class="contact-info-side">
+
+
+                    <div class="contact-socials">
+                        <a href="https://github.com/jovinnijo57-stack" target="_blank" class="social-icon github"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/jovin-nijo-773627240" target="_blank"
+                            class="social-icon linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/jovin_nijo" target="_blank" class="social-icon instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1NAB4ziX9C/" target="_blank"
+                            class="social-icon facebook"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-side">
+                    <form class="glass-form" onsubmit="return false">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message <i
+                                class="ri-send-plane-fill"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; <b>JOVIN NIJO</b>. Built with Code.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
